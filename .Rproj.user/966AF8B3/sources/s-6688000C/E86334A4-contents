@@ -1,0 +1,12 @@
+Package: RobustIA
+Type: Package
+Title: Robust time selection for interim analysis in the Bayesian 
+       phase 2 exploratory clinical trial
+Version: 0.1.0
+Authors: Bo Feng, Benny Zee
+Maintainer: Bo Feng <bo.feng@link.cuhk.edu.hk>
+Description: The R package for the manucript "Robust time selection for interim analysis in the Bayesian 
+             phase 2 exploratory clinical trial"
+License: GPL
+Encoding: UTF-8
+LazyData: true
