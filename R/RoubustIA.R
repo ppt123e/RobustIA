@@ -96,6 +96,7 @@ condition2=function(x,cutoff){
   return(length(which(x==-1))>=cutoff)
 }
 
+
 #####Metrics
 metrics=function(X,res_df_cp1,l,condition,...){
   indexes=colnames(res_df_cp1)
@@ -105,8 +106,6 @@ metrics=function(X,res_df_cp1,l,condition,...){
   tmp2=tmp1[row.names(tmp1)=='1',]
   ppv=as.numeric(tmp2[2]/sum(tmp2))
   pos=res_df_cp1[res_df_cp1[,str_c('interim_',X)]==1,]
-  #pre_pos_tmp=apply(pos[,seq(index-l,index-1)],1,condition1,cutoff=l)
-  #after_pos_tmp=apply(pos[,seq(index+1,index+l)],1,condition1,cutoff=l)
   pre_pos_tmp=apply(pos[,seq(index-l,index-1)],1,condition,...)
   after_pos_tmp=apply(pos[,seq(index+1,index+l)],1,condition,...)
   stable=mean(pre_pos_tmp & after_pos_tmp)
@@ -122,9 +121,7 @@ metrics0=function(X,res_df_cp0,l,condition,...){
   npv=as.numeric(tmp2[1]/sum(tmp2))
   neg=res_df_cp0[res_df_cp0[,str_c('interim_',X)]==-1,]
   pre_neg_tmp=apply(neg[,seq(index-l,index-1)],1,condition,...)
-  #pre_neg_tmp=apply(neg[,seq(index-l,index-1)],1,condition2,cutoff=4)
   after_neg_tmp=apply(neg[,seq(index+1,index+l)],1,condition,...)
-  #after_neg_tmp=apply(neg[,seq(index+1,index+l)],1,condition2,cutoff=4)
   stable=mean(pre_neg_tmp & after_neg_tmp)
   return(c(npv,stable))
 }
@@ -150,7 +147,7 @@ metrics0=function(X,res_df_cp0,l,condition,...){
 #' @return A data frame containing U score and its components (P1k,S1k,P2k,S2k) for each IA timing
 #' @export
 
-Uscore=function(Nmax,enroll_time,follow_time,theta0,theta1,Pc,Pe,Pf,l,a,b,start,end,gamma,w,monitor_type,n_simu=10000){
+Uscore=function(Nmax,enroll_time,follow_time,theta0,theta1,Pc,Pe,Pf,l,a,b,start,end,gamma,w,n_simu=10000){
   interim=seq(2,Nmax,1)
   n_interim=interim[1:(length(interim)-1)]
   interim_num=length(n_interim)
@@ -190,3 +187,4 @@ Uscore=function(Nmax,enroll_time,follow_time,theta0,theta1,Pc,Pe,Pf,l,a,b,start,
   res_all=arrange(res_all,desc(Uscore))
   return(res_all)
 }
+

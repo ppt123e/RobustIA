@@ -20,7 +20,6 @@ Uscore(
   end,
   gamma,
   w,
-  monitor_type,
   n_simu = 10000
 )
 }
